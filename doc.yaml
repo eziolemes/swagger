@@ -1,0 +1,71 @@
+openapi: 3.0.1
+info:
+  title: API Plataforma de cursos
+  description: API para acessar a plataforma de cursos do FSLab
+  version: "1.0"
+  termsOfService: http://localhost/termos
+  contact:
+    name: Suporte a desenvolvedores
+    email: devs@fslab.deb
+  license: 
+    name: "MIT"
+    url: https://opensource.org/licenses/MIT
+externalDocs:
+  description: Documentação pública da API
+  url: http://localhost/api
+
+paths:
+  /cursos:
+    get:
+      summary: Listar todos os cursos
+      responses:
+        200:
+          description: sucesso
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Curso'
+    post:
+      summary: Cadastrar um novo curso
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                titulo:
+                  type: string
+                cargahoraria:
+                  type: number
+      responses:
+        201:
+          description: cadastrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+        400:
+          description: curso não cadastrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensagem:
+                    type: string
+          
+          
+     
+components:
+  schemas:
+    Curso:
+      type: object
+      properties:
+        id:
+          type: integer
+        titulo:
+          type: string
+        cargahoraria:
+          type: number
